@@ -71,3 +71,11 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+=======
+- Instalación de nestJS
+- Instalación de mongoDB como base de datos
+
+## Pasos para crear este proyecto
+1. Averiguar las bases de nestJS para la preparación del entorno
+2. Definir los tipos de controllers: uno para users y otro para posts para dividir responsabilidades
+3. Crear métodos dentro de cada controller con ayuda de los decoradores y definiendo las rutas de las peticiones
