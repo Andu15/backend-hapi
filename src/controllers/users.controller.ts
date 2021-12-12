@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDTO } from '../dto/user.dto';
 
@@ -14,6 +14,4 @@ export class UsersController {
       user,
     };
   }
-
-  // API de autenticación con correo y contraseña
 }
