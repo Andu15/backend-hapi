@@ -12,7 +12,8 @@ import {
 import { PostsService } from '../services/posts.service';
 import { CreatePostDTO } from '../dtos/post.dto';
 import { ApiKeyGuard } from '../../auth/guards/api-key.guard';
-import { Public } from '../../decorators/public.decorator';
+import { Public } from '../../auth/decorators/public.decorator';
+// 'src/auth/decorators/public.decorator.ts'
 
 @UseGuards(ApiKeyGuard)
 @Controller('posts')
