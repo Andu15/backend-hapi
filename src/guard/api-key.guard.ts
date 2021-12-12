@@ -3,11 +3,9 @@ import {
   ExecutionContext,
   Injectable,
   UnauthorizedException,
-  Inject,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Observable } from 'rxjs';
-// import {  } from '../';
 import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 import { Request } from 'express';
 
@@ -24,11 +22,19 @@ export class ApiKeyGuard implements CanActivate {
     }
     // contexto del request
     const request = context.switchToHttp().getRequest<Request>();
-    const authHeader = request.header('Auth');
-    const isAuth = authHeader === '1234';
-    if (!isAuth) {
+
+    // creando los headers
+    const emailHeader = request.header('email');
+    const pwdHeader = request.header('pwd');
+
+    // asignando credenciales para permisos
+    const authEmail = emailHeader === 'permission@imhapi.app';
+    const authPwd = pwdHeader === '1@hapi_challenge';
+
+    // condicional de los headers
+    if (!authEmail && !authPwd) {
       throw new UnauthorizedException('not allow');
     }
-    return isAuth;
+    return true;
   }
 }
