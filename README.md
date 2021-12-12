@@ -72,10 +72,37 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](LICENSE).
 =======
+# Backend HAPI
+Este proyecto esta construido sobre nestJS, para crear una imagen he utilizado Docker expuesto en el puerto 3000, Insomnia para la simulación de peticiones de frontend, para la autenticación estoy usando Passport y JWT
+
+## Descripción del reto
+La prueba consiste en hacer solo un backend SIN UI (frontend) que exponga servicios para las
+siguientes funcionalidades:
+- API de registro de usuarios con los campos: correo, contraseña y nombre
+- API de autenticación con correo y contraseña
+- API de creación de posts con los campos de título, descripción e imagen estando el
+usuario ya autenticado
+- API de listado de posts
+- API para la eliminación de un post, en caso el mismo pertenezca al usuario autenticado
+- API que permita, al usuario autenticado, votar o quitar el voto dado a un post
+# Requisitos
+
 - Instalación de nestJS
 - Instalación de mongoDB como base de datos
-
+- Instalación de Passport
+- - Instalación de JWT
 ## Pasos para crear este proyecto
 1. Averiguar las bases de nestJS para la preparación del entorno
 2. Definir los tipos de controllers: uno para users y otro para posts para dividir responsabilidades
 3. Crear métodos dentro de cada controller con ayuda de los decoradores y definiendo las rutas de las peticiones
+4. Crear una máquina virtual con Docker junto con mongoDB
+5. Crear directorios con el CLI: 
+   - dto: aquí reside los datos que se aceptaran y su tipado
+   - controllers: es donde se colocan las rutas y servicios(en este caso mongoDB) que se estan llamando con los métodos de get, post, delete, put, etc
+   - services: son los famosos ejecutables de parte del servicio (en este caso mongo), donde se le indica los tipos de datos que recibira y el modelo(los schemas)
+   - modules: es como el indice, recoge todos los modulos de la api, librerias, controllers, services, schemas y es llamado desde el import en `app.module.ts` 
+   - schemas: propio del servicio, indica la estructura que recibira el servicio
+6. Luego de construir la estructura inicial, pasar a la etapa de autenticación, para ello creo la carpeta `interfaces` donde existe una clase extendida del documento de mongoDB
+7. Para el tema de autenticacion, usare [Passport](https://github.com/jaredhanson/passport) y [JWT](https://jwt.io/)
+8. Creo un módulo indepeniente para auth con `nest g mo modules/auth --flat` y también necesito un guardian para proteger las peticiones y lo creo con `nest g gu guard/apiKey --flat`
+9. Dentro del archivo `api-key.guards.ts` configuro los Headers que va a recibir dentro del contexto del request, en este caso es necesario enviarle un Auth con su valor '1234' para tener acceso
