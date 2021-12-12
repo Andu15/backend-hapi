@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-// import { AppController } from './app.controller';
-// import { AppService } from './app.service';
-import { UserModule } from './modules/user.module';
-import { PostModule } from './modules/post.module';
+import { UserModule } from './users/user.module';
+import { PostModule } from './posts/post.module';
 
 // const mongodb = {
 //   user: 'user',
