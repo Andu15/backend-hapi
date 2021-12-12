@@ -106,3 +106,7 @@ usuario ya autenticado
 7. Para el tema de autenticacion, usare [Passport](https://github.com/jaredhanson/passport) y [JWT](https://jwt.io/)
 8. Creo un módulo indepeniente para auth con `nest g mo modules/auth --flat` y también necesito un guardian para proteger las peticiones y lo creo con `nest g gu guard/apiKey --flat`
 9. Dentro del archivo `api-key.guards.ts` configuro los Headers que va a recibir dentro del contexto del request, en este caso es necesario enviarle un Auth con su valor '1234' para tener acceso
+10. Se usa `@SetMetadata` para crear una variable y a partir de ello un contexto
+11. Para que las variables sean mantenidas, se crea un decorador
+12. 
+
