@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nest-app:
+    container_name: nest-app
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=user
+    #   - MONGO_INITDB_ROOT_PASSWORD=happimongo
+    #   - MONGO_INITDB_DATABASE=my_hapi
+    volumes:
+      - dbdata:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  dbdata:
