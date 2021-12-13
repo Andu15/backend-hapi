@@ -7,13 +7,13 @@ import {
   Patch,
   Post,
   UseGuards,
-  SetMetadata,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
 import { PostsService } from '../services/posts.service';
 import { CreatePostDTO } from '../dtos/post.dto';
 import { ApiKeyGuard } from '../../auth/guards/api-key.guard';
 import { Public } from '../../auth/decorators/public.decorator';
-// 'src/auth/decorators/public.decorator.ts'
 
 @UseGuards(ApiKeyGuard)
 @Controller('posts')
@@ -21,6 +21,7 @@ export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
   // METODO POST: API de creación de posts con los campos de título, descripción e imagen estando el usuario ya autenticado
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createPost(@Body() createPostDTO: CreatePostDTO) {
     const post = await this.postsService.create(createPostDTO);
@@ -45,11 +46,13 @@ export class PostsController {
     };
   }
 
-  // METODO PUT: API que permita, al usuario autenticado, votar o quitar el voto dado a un post
+  // METODO PATCH: API que permita, al usuario autenticado, votar o quitar el voto dado a un post
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   updatePost(@Param('id') id: string) {
-    return {
-      message: `The post with id ${id} has been updated successfully`,
-    };
+    return this.postsService.findAll();
+    // return {
+    //   message: `The post with id ${id} has been updated successfully`,
+    // };
   }
 }
