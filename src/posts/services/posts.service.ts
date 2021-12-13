@@ -4,9 +4,13 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Post, PostDocument } from '../schemas/post.schema';
 import { CreatePostDTO } from '../dtos/post.dto';
+import { AuthService } from '../../auth/services/auth.service';
 @Injectable()
 export class PostsService {
-  constructor(@InjectModel(Post.name) private postModel: Model<PostDocument>) {}
+  constructor(
+    @InjectModel(Post.name) private postModel: Model<PostDocument>,
+    private authService: AuthService,
+  ) {}
 
   async create(createPostDto: CreatePostDTO): Promise<Post> {
     const createdPost = new this.postModel(createPostDto);
@@ -25,5 +29,9 @@ export class PostsService {
       throw new NotFoundException(`post with #${id} not found`);
     }
     return post;
+  }
+
+  remove(id: string) {
+    return this.postModel.findByIdAndDelete(id);
   }
 }

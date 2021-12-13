@@ -25,8 +25,17 @@ export class AuthService {
     return null;
   }
 
+  async validateUserById(email: string) {
+    const user = await this.usersService.findByEmail(email);
+    return user;
+  }
+
   generateJWT(user: User) {
-    const payload: PayloadToken = { sub: user.id };
+    const payload: PayloadToken = {
+      name: user.email,
+      sub: user.id,
+      userId: user.id,
+    };
     return {
       access_token: this.jwtService.sign(payload),
       user,

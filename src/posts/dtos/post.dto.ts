@@ -3,4 +3,5 @@ export class CreatePostDTO {
   readonly description: string;
   readonly image: string;
   readonly like: boolean;
+  readonly userId: string;
 }

@@ -17,7 +17,5 @@ const url = 'mongodb://localhost/hapi';
 
 @Module({
   imports: [MongooseModule.forRoot(url), UserModule, PostModule],
-  // controllers: [AppController],
-  // providers: [AppService],
 })
 export class AppModule {}
