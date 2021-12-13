@@ -13,6 +13,9 @@ export class Post {
 
   @Prop()
   imagen: string;
+
+  @Prop()
+  like: boolean;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

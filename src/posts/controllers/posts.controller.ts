@@ -49,10 +49,7 @@ export class PostsController {
   // METODO PATCH: API que permita, al usuario autenticado, votar o quitar el voto dado a un post
   @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
-  updatePost(@Param('id') id: string) {
-    return this.postsService.findAll();
-    // return {
-    //   message: `The post with id ${id} has been updated successfully`,
-    // };
+  updatePost(@Param('id') id: string, @Body() createPostDTO: CreatePostDTO) {
+    return this.postsService.update(id, createPostDTO);
   }
 }
