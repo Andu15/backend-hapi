@@ -30,7 +30,7 @@ export class PostsController {
     };
   }
 
-  // METODO GET: API de listado de posts  --TERMINADO!
+  // METODO GET: API de listado de posts
   @Public()
   @Get()
   async getList() {
