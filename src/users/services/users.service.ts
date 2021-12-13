@@ -16,14 +16,15 @@ export class UsersService {
     const hashPwd = await bcrypt.hash(createdUser.password, 10);
     createdUser.password = hashPwd;
     const model = await createdUser.save();
-    const { password, ...rta } = model.toJSON();
-    return rta;
+    const { password, ...result } = model.toJSON();
+    return result;
   }
 
   async findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
-  async findByEmail(email: string) {
+
+  findByEmail(email: string) {
     return this.userModel.findOne({ email }).exec();
   }
 }
